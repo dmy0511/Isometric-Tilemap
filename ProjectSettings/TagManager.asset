@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - attack
+  - apple_Sign
+  - chicken_Sign
+  - fish_Sign
+  - Farm_Sign
+  - omg_Sign
   layers:
   - Default
   - TransparentFX
