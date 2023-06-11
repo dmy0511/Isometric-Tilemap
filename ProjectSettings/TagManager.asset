@@ -10,6 +10,7 @@ TagManager:
   - fish_Sign
   - Farm_Sign
   - omg_Sign
+  - Tree
   layers:
   - Default
   - TransparentFX
