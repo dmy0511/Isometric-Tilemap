@@ -14,8 +14,12 @@ public class Tree : MonoBehaviour
     private float maxHp = 100;
     private float curHp = 100;
 
-    //public Image itemImage;
-    //public Image inventorySlot;
+    private AudioSource audio;
+
+    private void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+    }
 
     void Start()
     {
@@ -47,6 +51,7 @@ public class Tree : MonoBehaviour
         if(curHp > 0)
         {
             curHp -= 20;
+            audio.Play();
         }
         else
         {

@@ -11,6 +11,7 @@ TagManager:
   - Farm_Sign
   - omg_Sign
   - Tree
+  - DropItems
   layers:
   - Default
   - TransparentFX
