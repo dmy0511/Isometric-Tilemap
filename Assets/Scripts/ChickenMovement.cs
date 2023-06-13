@@ -1,113 +1,115 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Random = UnityEngine.Random;
 using UnityEngine;
 
 public class ChickenMovement : MonoBehaviour
 {
-    public float minX = 1.5f;
-    public float maxX = 20.5f;
-    public float minY = -3.1f;
-    public float maxY = 6.4f;
-    public float speed = 0.5f;
-    public Sprite eggSprite;
     public Sprite runSprite;
-    public GameObject GetPanel2;
+    public Sprite eggSprite;
 
-    private bool movingRight = true;
-    private bool movingUp = true;
-    private int playerCollisions = 0;
+    public GameObject get_Panel_2;
+    public GameObject chickenObject;
+
     private SpriteRenderer spriteRenderer;
-    private CircleCollider2D circleCollider;
     private Rigidbody2D rb;
+    
+    private float moveSpeed = 1f;
+    private int collisionCount = 0;
+    private Vector2 movementDirection;
+    private bool isMoving = true;
 
-    private void Start()
+    void Start()
     {
-        movingRight = (Random.Range(0, 2) == 1) ? true : false;
-        movingUp = (Random.Range(0, 2) == 1) ? true : false;
-
-        Time.timeScale = 1.0f;
-        spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-    }
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
-    private void Update()
-    {
-        if (playerCollisions >= 3)
-        {
-            Destroy(gameObject);
-            GetPanel2.SetActive(true);
-            Time.timeScale = 0.0f;
-            return;
-        }
-
-        Vector3 targetPosition = transform.position;
-        float movementX = (playerCollisions >= 1 ? speed * 2f : speed) * Time.deltaTime;
-        float movementY = (playerCollisions >= 1 ? speed * 2f : speed) * Time.deltaTime;
-
-        float horizontalDirection = movingRight ? 1f : -1f;
-        float verticalDirection = movingUp ? 1f : -1f;
-
-        targetPosition.x += horizontalDirection * movementX;
-        targetPosition.y += verticalDirection * movementY;
-
-        targetPosition.x = Mathf.Clamp(targetPosition.x, minX, maxX);
-        targetPosition.y = Mathf.Clamp(targetPosition.y, minY, maxY);
-
-        transform.position = targetPosition;
-
-        Vector3 moveDirection = targetPosition - transform.position;
-        FlipSprite(moveDirection.normalized);
-    }
-
-    private void FlipSprite(bool facingRight)
-    {
-        spriteRenderer.flipX = !facingRight;
+        movementDirection = GetRandomDirection();
+        rb.velocity = movementDirection * moveSpeed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            playerCollisions++;
+            collisionCount++;
 
-            if (playerCollisions == 1)
+            if (collisionCount == 1)
             {
                 spriteRenderer.sprite = runSprite;
-                speed = 2f;
+                moveSpeed = 5f;
+                Flip();
             }
-            else if (playerCollisions == 2)
+            else if (collisionCount == 2)
             {
                 spriteRenderer.sprite = eggSprite;
-                speed = 0f;
+                StopMotion();
+            }
+            else if (collisionCount == 3)
+            {
+                Time.timeScale = 0f;
+                get_Panel_2.SetActive(true);
             }
         }
-        else if (collision.gameObject.CompareTag("Tilemap"))
+        else if (collision.gameObject.CompareTag("Collider"))
         {
-            movingRight = !movingRight;
-            FlipSprite(movingRight);
+            Flip();
+        }
+        else if (collision.gameObject.CompareTag("Chicken"))
+        {
+            Flip();
         }
     }
 
-    public void get2()
+    private void Flip()
     {
-        Time.timeScale = 1.0f;
-        GetPanel2.SetActive(false);
+        spriteRenderer.flipX = !spriteRenderer.flipX;
+
+        movementDirection *= -1;
+
+        rb.velocity = movementDirection * moveSpeed;
     }
-    
-    private void FlipSprite(Vector3 direction)
+
+    private Vector2 GetRandomDirection()
     {
-        if (direction.x > 0)
+        float randomAngle = UnityEngine.Random.Range(0f, 360f);
+
+        return Quaternion.Euler(0f, 0f, randomAngle) * Vector2.right;
+    }
+
+    private void StopMotion()
+    {
+        rb.velocity = Vector2.zero;
+
+        isMoving = false;
+    }
+
+    void Update()
+    {
+        if (isMoving)
         {
-            spriteRenderer.flipX = false;
+            rb.velocity = movementDirection * moveSpeed;
+
+            if (movementDirection.x > 0)
+            {
+                spriteRenderer.flipX = false;
+            }
+            else if (movementDirection.x < 0)
+            {
+                spriteRenderer.flipX = true;
+            }
         }
-        else if (direction.x < 0)
-        {
-            spriteRenderer.flipX = true;
-        }
+    }
+
+    public void OnGetButtonPressed()
+    {
+        Destroy(chickenObject);
+        Time.timeScale = 1f;
+        get_Panel_2.SetActive(false);
     }
 }
+
+
 
 
 

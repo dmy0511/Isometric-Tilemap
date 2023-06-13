@@ -12,7 +12,8 @@ TagManager:
   - omg_Sign
   - Tree
   - DropItems
-  - Tilemap
+  - Collider
+  - Chicken
   layers:
   - Default
   - TransparentFX
