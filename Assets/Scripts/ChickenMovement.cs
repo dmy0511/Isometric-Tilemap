@@ -29,7 +29,7 @@ public class ChickenMovement : MonoBehaviour
 
         Time.timeScale = 1.0f;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>(); // Added this line to get the Rigidbody2D component
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -100,11 +100,11 @@ public class ChickenMovement : MonoBehaviour
     {
         if (direction.x > 0)
         {
-            spriteRenderer.flipX = false; // Not flipped
+            spriteRenderer.flipX = false;
         }
         else if (direction.x < 0)
         {
-            spriteRenderer.flipX = true; // Flipped horizontally
+            spriteRenderer.flipX = true;
         }
     }
 }
