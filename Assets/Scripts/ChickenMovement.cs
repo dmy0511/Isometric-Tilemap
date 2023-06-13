@@ -8,13 +8,13 @@ public class ChickenMovement : MonoBehaviour
     public Sprite runSprite;
     public Sprite eggSprite;
 
-    public GameObject get_Panel_2;
+    public GameObject getPanel2;
     public GameObject chickenObject;
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     
-    private float moveSpeed = 1f;
+    private float moveSpeed = 4f;
     private int collisionCount = 0;
     private Vector2 movementDirection;
     private bool isMoving = true;
@@ -25,6 +25,7 @@ public class ChickenMovement : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         movementDirection = GetRandomDirection();
+        print(movementDirection);
         rb.velocity = movementDirection * moveSpeed;
     }
 
@@ -38,6 +39,7 @@ public class ChickenMovement : MonoBehaviour
             {
                 spriteRenderer.sprite = runSprite;
                 moveSpeed = 5f;
+                
                 Flip();
             }
             else if (collisionCount == 2)
@@ -48,16 +50,20 @@ public class ChickenMovement : MonoBehaviour
             else if (collisionCount == 3)
             {
                 Time.timeScale = 0f;
-                get_Panel_2.SetActive(true);
+                getPanel2.SetActive(true);
             }
         }
         else if (collision.gameObject.CompareTag("Collider"))
         {
             Flip();
+            movementDirection = GetRandomDirection();
+            rb.velocity = movementDirection * moveSpeed;
         }
         else if (collision.gameObject.CompareTag("Chicken"))
         {
             Flip();
+            //movementDirection = GetRandomDirection();
+            //rb.velocity = movementDirection * moveSpeed;
         }
     }
 
@@ -82,6 +88,7 @@ public class ChickenMovement : MonoBehaviour
         rb.velocity = Vector2.zero;
 
         isMoving = false;
+        moveSpeed = 0f;
     }
 
     void Update()
@@ -101,11 +108,11 @@ public class ChickenMovement : MonoBehaviour
         }
     }
 
-    public void OnGetButtonPressed()
+    public void get2()
     {
         Destroy(chickenObject);
         Time.timeScale = 1f;
-        get_Panel_2.SetActive(false);
+        getPanel2.SetActive(false);
     }
 }
 
