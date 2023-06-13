@@ -63,12 +63,6 @@ public class Tree : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         GetPanel.SetActive(false);
-
-        //Sprite itemSprite = itemImage.sprite;
-
-        //inventorySlot.sprite = itemSprite;
-
-        //inventorySlot.enabled = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

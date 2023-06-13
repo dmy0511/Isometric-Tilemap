@@ -12,6 +12,7 @@ TagManager:
   - omg_Sign
   - Tree
   - DropItems
+  - Tilemap
   layers:
   - Default
   - TransparentFX
