@@ -114,16 +114,16 @@ public class ChickenMovement1 : MonoBehaviour
         Time.timeScale = 1f;
         getPanel21.SetActive(false);
         
-        if (moneyUp > -1)
+        if (MoneyManager.Instance.moneyUp > -1)
         {
-            moneyUp += 100;
+            MoneyManager.Instance.moneyUp += 100;
             UpdateMoneyText();
         }
     }
     
     private void UpdateMoneyText()
     {
-        moneyText.text = moneyUp.ToString() + "원";
+        moneyText.text = MoneyManager.Instance.moneyUp.ToString() + "원";
     }
 }
 

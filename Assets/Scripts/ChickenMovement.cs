@@ -20,7 +20,7 @@ public class ChickenMovement : MonoBehaviour
     private bool isMoving = true;
 
     public Text moneyText;
-    private int moneyUp;
+    //private int moneyUp;
     
     void Start()
     {
@@ -30,7 +30,7 @@ public class ChickenMovement : MonoBehaviour
         movementDirection = GetRandomDirection();
         rb.velocity = movementDirection * moveSpeed;
         
-        moneyUp = 0;
+        //moneyUp = 0;
         UpdateMoneyText();
     }
 
@@ -113,17 +113,17 @@ public class ChickenMovement : MonoBehaviour
         Destroy(this.gameObject);
         Time.timeScale = 1f;
         getPanel2.SetActive(false);
-        
-        if (moneyUp > -1)
+
+        if (MoneyManager.Instance.moneyUp > -1)
         {
-            moneyUp += 100;
+            MoneyManager.Instance.moneyUp += 100;
             UpdateMoneyText();
         }
     }
     
     private void UpdateMoneyText()
     {
-        moneyText.text = moneyUp.ToString() + "원";
+        moneyText.text = MoneyManager.Instance.moneyUp.ToString() + "원";
     }
 }
 
