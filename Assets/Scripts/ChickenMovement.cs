@@ -18,9 +18,6 @@ public class ChickenMovement : MonoBehaviour
     private int collisionCount = 0;
     private Vector2 movementDirection;
     private bool isMoving = true;
-
-    public Text moneyText;
-    //private int moneyUp;
     
     void Start()
     {
@@ -29,9 +26,6 @@ public class ChickenMovement : MonoBehaviour
 
         movementDirection = GetRandomDirection();
         rb.velocity = movementDirection * moveSpeed;
-        
-        //moneyUp = 0;
-        UpdateMoneyText();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -113,17 +107,6 @@ public class ChickenMovement : MonoBehaviour
         Destroy(this.gameObject);
         Time.timeScale = 1f;
         getPanel2.SetActive(false);
-
-        if (MoneyManager.Instance.moneyUp > -1)
-        {
-            MoneyManager.Instance.moneyUp += 100;
-            UpdateMoneyText();
-        }
-    }
-    
-    private void UpdateMoneyText()
-    {
-        moneyText.text = MoneyManager.Instance.moneyUp.ToString() + "원";
     }
 }
 

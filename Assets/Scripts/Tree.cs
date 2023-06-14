@@ -13,9 +13,6 @@ public class Tree : MonoBehaviour
 
     private float maxHp = 100;
     private float curHp = 100;
-
-    public Text moneyText;
-    private int moneyUp;
     
     private AudioSource audioSource;
 
@@ -29,8 +26,6 @@ public class Tree : MonoBehaviour
         Time.timeScale = 1.0f;
 
         treeHp.value = (float)curHp / (float)maxHp;
-        moneyUp = 0;
-        UpdateMoneyText();
     }
 
     void Update()
@@ -68,17 +63,6 @@ public class Tree : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         GetPanel.SetActive(false);
-        
-        if (moneyUp > -1)
-        {
-            moneyUp += 50;
-            UpdateMoneyText();
-        }
-    }
-    
-    private void UpdateMoneyText()
-    {
-        moneyText.text = moneyUp.ToString() + "원";
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

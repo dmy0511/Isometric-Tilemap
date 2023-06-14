@@ -235,6 +235,7 @@ MonoBehaviour:
   treePanel: {fileID: 0}
   GetPanel: {fileID: 0}
   treeHp: {fileID: 0}
+  moneyText: {fileID: 0}
 --- !u!82 &8605547228825803156
 AudioSource:
   m_ObjectHideFlags: 0
