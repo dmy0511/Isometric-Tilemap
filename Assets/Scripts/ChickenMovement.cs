@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChickenMovement : MonoBehaviour
 {
@@ -25,7 +26,6 @@ public class ChickenMovement : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         movementDirection = GetRandomDirection();
-        print(movementDirection);
         rb.velocity = movementDirection * moveSpeed;
     }
 
@@ -62,8 +62,6 @@ public class ChickenMovement : MonoBehaviour
         else if (collision.gameObject.CompareTag("Chicken"))
         {
             Flip();
-            //movementDirection = GetRandomDirection();
-            //rb.velocity = movementDirection * moveSpeed;
         }
     }
 
@@ -85,9 +83,6 @@ public class ChickenMovement : MonoBehaviour
 
     private void StopMotion()
     {
-        rb.velocity = Vector2.zero;
-
-        isMoving = false;
         moveSpeed = 0f;
     }
 
