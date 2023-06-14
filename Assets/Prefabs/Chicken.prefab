@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6072591983110181083}
   - component: {fileID: 6072591983110181080}
   - component: {fileID: 6072591983110181081}
-  - component: {fileID: 6072591983110181094}
   m_Layer: 0
   m_Name: Chicken
   m_TagString: Untagged
@@ -124,18 +123,3 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.10123849}
   serializedVersion: 2
   m_Radius: 2.5
---- !u!114 &6072591983110181094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9127221624466321536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97cd1ba486495b45b8baf876a53abcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  runSprite: {fileID: 21300000, guid: 6e7351f664c548c4db64cf4d555461ba, type: 3}
-  eggSprite: {fileID: -719403564, guid: 9baf3f532da6e4342ad12b72d3262793, type: 3}
-  getPanel2: {fileID: 0}

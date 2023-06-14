@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChickenMovement : MonoBehaviour
+public class ChickenMovement2 : MonoBehaviour
 {
     public Sprite runSprite;
     public Sprite eggSprite;
 
-    public GameObject getPanel2;
+    public GameObject getPanel22;
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
@@ -55,7 +55,7 @@ public class ChickenMovement : MonoBehaviour
             else if (collisionCount == 3)
             {
                 Time.timeScale = 0f;
-                getPanel2.SetActive(true);
+                getPanel22.SetActive(true);
             }
         }
         else if (collision.gameObject.CompareTag("Collider"))
@@ -112,7 +112,7 @@ public class ChickenMovement : MonoBehaviour
     {
         Destroy(this.gameObject);
         Time.timeScale = 1f;
-        getPanel2.SetActive(false);
+        getPanel22.SetActive(false);
         
         if (moneyUp > -1)
         {
