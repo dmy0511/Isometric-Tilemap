@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public enum GameState
 {
-    UserPlay_Ing = 0,   //À¯Àú°¡ ¼±ÅÃÀ» °í¹ÎÇÏ´Â »óÅÂ
-    Result_Ing = 1,   //°á°ú º¸¿©ÁÖ±â »óÅÂ
-    GameEnd = 2    //°ÔÀÓ Á¾·á »óÅÂ
+    UserPlay_Ing = 0,   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
+    Result_Ing = 1,   //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½
+    GameEnd = 2    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 }
 
 public enum GawiBawiBo
@@ -94,7 +94,7 @@ public class Game_Mgr : MonoBehaviour
             m_Gameble = 50 + (int)(m_Gameble_Slider.value * (m_Money - 50));
 
         if (m_Gameble_Text != null)
-            m_Gameble_Text.text = "º¸À¯ ±Ý¾× : " + m_Gameble;
+            m_Gameble_Text.text = "ï¿½ï¿½ï¿½ï¿½ ï¿½Ý¾ï¿½ : " + m_Gameble;
 
         if (m_GameState == GameState.UserPlay_Ing)
         {
@@ -126,38 +126,38 @@ public class Game_Mgr : MonoBehaviour
         GawiBawiBo a_ComSel = (GawiBawiBo)Random.Range(
                               (int)GawiBawiBo.Gawi, (int)GawiBawiBo.Count);
 
-        string a_strUser = "°¡À§";
+        string a_strUser = "ï¿½ï¿½ï¿½ï¿½";
         if (a_UserSel == GawiBawiBo.Bawi)
-            a_strUser = "¹ÙÀ§";
+            a_strUser = "ï¿½ï¿½ï¿½ï¿½";
         else if (a_UserSel == GawiBawiBo.Bo)
-            a_strUser = "º¸";
+            a_strUser = "ï¿½ï¿½";
 
-        string a_strCom = "°¡À§";
+        string a_strCom = "ï¿½ï¿½ï¿½ï¿½";
         if (a_ComSel == GawiBawiBo.Bawi)
-            a_strCom = "¹ÙÀ§";
+            a_strCom = "ï¿½ï¿½ï¿½ï¿½";
         else if (a_ComSel == GawiBawiBo.Bo)
-            a_strCom = "º¸";
+            a_strCom = "ï¿½ï¿½";
 
         m_Result_Text.text = "User(" + a_strUser + ") : Com(" + a_strCom + ")";
 
         if (a_UserSel == a_ComSel)
         {
-            m_Result_Text.text += " ºñ°å½À´Ï´Ù.";
+            m_Result_Text.text += " ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.";
         }
         else if ((a_UserSel == GawiBawiBo.Gawi && a_ComSel == GawiBawiBo.Bo) ||
                  (a_UserSel == GawiBawiBo.Bawi && a_ComSel == GawiBawiBo.Gawi) ||
                  (a_UserSel == GawiBawiBo.Bo && a_ComSel == GawiBawiBo.Bawi))
         {
-            m_Result_Text.text += " ½Â¸®ÇÏ¼Ì½À´Ï´Ù.";
+            m_Result_Text.text += " ï¿½Â¸ï¿½ï¿½Ï¼Ì½ï¿½ï¿½Ï´ï¿½.";
 
-            m_Money += (m_Gameble * 2);
+            m_Money += (m_Gameble * 1);
 
-            SpawnDmgText((m_Gameble * 2), m_SpawnTxtPos.position,
+            SpawnDmgText((m_Gameble * 1), m_SpawnTxtPos.position,
                                             new Color32(130, 130, 255, 255));
         }
         else
         {
-            m_Result_Text.text += " ÆÐ¹èÇÏ¼Ì½À´Ï´Ù.";
+            m_Result_Text.text += " ï¿½Ð¹ï¿½ï¿½Ï¼Ì½ï¿½ï¿½Ï´ï¿½.";
 
             m_Money -= m_Gameble;
 
@@ -172,7 +172,7 @@ public class Game_Mgr : MonoBehaviour
         }
 
         if (m_UserInfo_Text != null)
-            m_UserInfo_Text.text = "À¯ÀúÀÇ º¸À¯±Ý¾× : " + m_Money;
+            m_UserInfo_Text.text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ý¾ï¿½ : " + m_Money;
 
         Refresh_UI(a_UserSel, a_ComSel);
     }
@@ -200,19 +200,19 @@ public class Game_Mgr : MonoBehaviour
         if (a_U_Sel == a_C_Sel)
         {
             m_ShowResultText.color = new Color32(90, 90, 90, 255);
-            m_ShowResultText.text = "¹«½ÂºÎ";
+            m_ShowResultText.text = "ï¿½ï¿½ï¿½Âºï¿½";
         }
         else if ((a_U_Sel == GawiBawiBo.Gawi && a_C_Sel == GawiBawiBo.Bo) ||
                  (a_U_Sel == GawiBawiBo.Bawi && a_C_Sel == GawiBawiBo.Gawi) ||
                  (a_U_Sel == GawiBawiBo.Bo && a_C_Sel == GawiBawiBo.Bawi))
         {
             m_ShowResultText.color = new Color32(0, 0, 255, 255);
-            m_ShowResultText.text = "½Â¸®!!";
+            m_ShowResultText.text = "ï¿½Â¸ï¿½!!";
         }
         else
         {
             m_ShowResultText.color = new Color32(255, 0, 0, 255);
-            m_ShowResultText.text = "ÆÐ¹è..";
+            m_ShowResultText.text = "ï¿½Ð¹ï¿½..";
         }
 
         m_ShowResultText.gameObject.SetActive(true);
@@ -276,7 +276,7 @@ public class Game_Mgr : MonoBehaviour
         if (value == true)
         {
             if (a_Label != null)
-                a_Label.text = "ÀÚµ¿";
+                a_Label.text = "ï¿½Úµï¿½";
 
             if (m_NextStartBtn != null)
                 m_NextStartBtn.gameObject.SetActive(false);
@@ -292,7 +292,7 @@ public class Game_Mgr : MonoBehaviour
         else
         {
             if (a_Label != null)
-                a_Label.text = "¼öµ¿";
+                a_Label.text = "ï¿½ï¿½ï¿½ï¿½";
 
             if (m_NextStartBtn != null)
                 m_NextStartBtn.gameObject.SetActive(true);
