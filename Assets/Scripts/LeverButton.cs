@@ -30,7 +30,7 @@ public class LeverButton : MonoBehaviour
     {
         buttonImage.sprite = releasedAndHighlightedSprite;
 
-        Invoke("RevertToReleasedSprite", 0.2f);
+        Invoke("RevertToReleasedSprite", 2f);
     }
 
     private void RevertToReleasedSprite()

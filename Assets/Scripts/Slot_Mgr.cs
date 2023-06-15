@@ -34,7 +34,7 @@ public class Slot_Mgr : MonoBehaviour
             }
             else
             {
-                Debug.Log("º¸À¯ÇÏ½Å µ·ÀÌ ¾ø½À´Ï´Ù.");
+                Debug.Log("ë³´ìœ í•˜ì‹  ëˆì´ ì—†ìŠµë‹ˆë‹¤.");
             }
         }
     }
@@ -49,7 +49,7 @@ public class Slot_Mgr : MonoBehaviour
         }
 
         float elapsedTime = 0f;
-        while (elapsedTime < 3f)
+        while (elapsedTime < 2f)
         {
             for (int i = 0; i < imageUIs.Length; i++)
             {
@@ -74,11 +74,11 @@ public class Slot_Mgr : MonoBehaviour
         {
             money += 100000;
             UpdateMoneyText();
-            Debug.Log("´ë¹Ú");
+            Debug.Log("ëŒ€ë°•");
         }
         else
         {
-            Debug.Log("µ·À» ÀÒÀ¸¼Ì½À´Ï´Ù.");
+            Debug.Log("ëˆì„ ìƒìœ¼ì…¨ìŠµë‹ˆë‹¤.");
         }
 
         isSpinning = false;
@@ -86,7 +86,7 @@ public class Slot_Mgr : MonoBehaviour
 
     private void UpdateMoneyText()
     {
-        moneyText.text = "º¸À¯ ±İ¾× : " + money.ToString();
+        moneyText.text = "ë³´ìœ  ê¸ˆì•¡ : " + money.ToString();
     }
 
     public void ExitBtnClick()
