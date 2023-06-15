@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public enum GameState
 {
-    UserPlay_Ing = 0,   //������ ������ ����ϴ� ����
-    Result_Ing = 1,   //��� �����ֱ� ����
-    GameEnd = 2    //���� ���� ����
+    UserPlay_Ing = 0,
+    Result_Ing = 1,
+    GameEnd = 2
 }
 
 public enum GawiBawiBo
@@ -43,11 +43,6 @@ public class Game_Mgr : MonoBehaviour
     public Image m_UserGBB_Img;
     public Image m_ComGBB_Img;
     public Text m_ShowResultText;
-
-    [Header("--- DamageText ---")]
-    public Transform m_HUD_Canvas = null;
-    public GameObject m_DamagePrefab = null;
-    public Transform m_SpawnTxtPos = null;
 
     [Header("--- Auto Button ---")]
     public Toggle m_AutoToggle = null;
@@ -94,7 +89,7 @@ public class Game_Mgr : MonoBehaviour
             m_Gameble = 50 + (int)(m_Gameble_Slider.value * (m_Money - 50));
 
         if (m_Gameble_Text != null)
-            m_Gameble_Text.text = "���� �ݾ� : " + m_Gameble;
+            m_Gameble_Text.text = "배팅금액 : " + m_Gameble;
 
         if (m_GameState == GameState.UserPlay_Ing)
         {
@@ -126,53 +121,47 @@ public class Game_Mgr : MonoBehaviour
         GawiBawiBo a_ComSel = (GawiBawiBo)Random.Range(
                               (int)GawiBawiBo.Gawi, (int)GawiBawiBo.Count);
 
-        string a_strUser = "����";
+        string a_strUser = "가위";
         if (a_UserSel == GawiBawiBo.Bawi)
-            a_strUser = "����";
+            a_strUser = "바위";
         else if (a_UserSel == GawiBawiBo.Bo)
-            a_strUser = "��";
+            a_strUser = "보";
 
-        string a_strCom = "����";
+        string a_strCom = "가위";
         if (a_ComSel == GawiBawiBo.Bawi)
-            a_strCom = "����";
+            a_strCom = "바위";
         else if (a_ComSel == GawiBawiBo.Bo)
-            a_strCom = "��";
+            a_strCom = "보";
 
         m_Result_Text.text = "User(" + a_strUser + ") : Com(" + a_strCom + ")";
 
         if (a_UserSel == a_ComSel)
         {
-            m_Result_Text.text += " �����ϴ�.";
+            m_Result_Text.text += " 본전 따셨습니다.";
         }
         else if ((a_UserSel == GawiBawiBo.Gawi && a_ComSel == GawiBawiBo.Bo) ||
                  (a_UserSel == GawiBawiBo.Bawi && a_ComSel == GawiBawiBo.Gawi) ||
                  (a_UserSel == GawiBawiBo.Bo && a_ComSel == GawiBawiBo.Bawi))
         {
-            m_Result_Text.text += " �¸��ϼ̽��ϴ�.";
+            m_Result_Text.text += " 2배 따셨습니다.";
 
             m_Money += (m_Gameble * 1);
-
-            SpawnDmgText((m_Gameble * 1), m_SpawnTxtPos.position,
-                                            new Color32(130, 130, 255, 255));
         }
         else
         {
-            m_Result_Text.text += " �й��ϼ̽��ϴ�.";
+            m_Result_Text.text += " 돈을 잃으셨습니다.";
 
             m_Money -= m_Gameble;
-
-            SpawnDmgText(-m_Gameble, m_SpawnTxtPos.position,
-                                            new Color32(255, 130, 130, 255));
 
             if (m_Money <= 0)
             {
                 m_Money = 0;
-                m_Result_Text.text = "Game Over";
+                m_Result_Text.text = "보유하신 돈이 없습니다.";
             }
         }
 
         if (m_UserInfo_Text != null)
-            m_UserInfo_Text.text = "������ �����ݾ� : " + m_Money;
+            m_UserInfo_Text.text = "보유 금액 : " + m_Money;
 
         Refresh_UI(a_UserSel, a_ComSel);
     }
@@ -200,19 +189,19 @@ public class Game_Mgr : MonoBehaviour
         if (a_U_Sel == a_C_Sel)
         {
             m_ShowResultText.color = new Color32(90, 90, 90, 255);
-            m_ShowResultText.text = "���º�";
+            m_ShowResultText.text = "무승부";
         }
         else if ((a_U_Sel == GawiBawiBo.Gawi && a_C_Sel == GawiBawiBo.Bo) ||
                  (a_U_Sel == GawiBawiBo.Bawi && a_C_Sel == GawiBawiBo.Gawi) ||
                  (a_U_Sel == GawiBawiBo.Bo && a_C_Sel == GawiBawiBo.Bawi))
         {
             m_ShowResultText.color = new Color32(0, 0, 255, 255);
-            m_ShowResultText.text = "�¸�!!";
+            m_ShowResultText.text = "승리";
         }
         else
         {
             m_ShowResultText.color = new Color32(255, 0, 0, 255);
-            m_ShowResultText.text = "�й�..";
+            m_ShowResultText.text = "패배";
         }
 
         m_ShowResultText.gameObject.SetActive(true);
@@ -255,20 +244,6 @@ public class Game_Mgr : MonoBehaviour
         Game_Panel.gameObject.SetActive(false);
     }
 
-    void SpawnDmgText(float a_Value, Vector3 a_TxtPos, Color a_Color)
-    {
-        if (m_DamagePrefab == null || m_HUD_Canvas == null)
-            return;
-
-        GameObject a_DmgClone = (GameObject)Instantiate(m_DamagePrefab);
-        a_DmgClone.transform.SetParent(m_HUD_Canvas, false);
-        a_DmgClone.transform.position = a_TxtPos;
-
-        DamageTxt a_DamageTx = a_DmgClone.GetComponent<DamageTxt>();
-        if (a_DamageTx != null)
-            a_DamageTx.InitDmgText(a_Value, a_Color);
-    }
-
     void AutoToggleCheck(bool value)
     {
         Text a_Label = m_AutoToggle.GetComponentInChildren<Text>();
@@ -276,7 +251,7 @@ public class Game_Mgr : MonoBehaviour
         if (value == true)
         {
             if (a_Label != null)
-                a_Label.text = "�ڵ�";
+                a_Label.text = "자동";
 
             if (m_NextStartBtn != null)
                 m_NextStartBtn.gameObject.SetActive(false);
@@ -292,7 +267,7 @@ public class Game_Mgr : MonoBehaviour
         else
         {
             if (a_Label != null)
-                a_Label.text = "����";
+                a_Label.text = "수동";
 
             if (m_NextStartBtn != null)
                 m_NextStartBtn.gameObject.SetActive(true);
