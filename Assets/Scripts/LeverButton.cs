@@ -28,9 +28,9 @@ public class LeverButton : MonoBehaviour
 
     private void OnButtonReleased()
     {
-        buttonImage.sprite = releasedAndHighlightedSprite;
-
         Invoke("RevertToReleasedSprite", 2f);
+
+        buttonImage.sprite = releasedAndHighlightedSprite;
     }
 
     private void RevertToReleasedSprite()
